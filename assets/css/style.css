@@ -849,6 +849,107 @@ section {
   min-height: 400px;
 }
 
+
+/* Features Section - Home Page
+------------------------------*/
+#project .features-item {
+ background:  #050b33a9;
+}
+
+#project .features-item+.features-item {
+  margin-top: 100px;
+}
+
+@media (max-width: 768px) {
+  #project .features-item+.features-item {
+    margin-top: 40px;
+  }
+}
+
+#project .features-item h3 {
+  font-weight: 700;
+  font-size: 26px;
+}
+
+#project .features-item .btn-get-started {
+  background:  linear-gradient(297deg, #AC7AF6 0%, #05FBAC  100%);
+  color: #fff;
+  padding: 8px 30px 10px 30px;
+  border-radius: 4px;
+}
+
+#project .features-item .btn-get-started:hover {
+  background:  linear-gradient(297deg, #05FBAC 0%, #AC7AF6  100%);
+}
+
+#project .features-item ul {
+  list-style: none;
+  padding: 0;
+}
+
+#project.features-item ul li {
+  padding-bottom: 10px;
+  display: flex;
+  align-items: flex-start;
+}
+
+#project .features-item ul li:last-child {
+  padding-bottom: 0;
+}
+
+#project.features-item ul i {
+  font-size: 20px;
+  padding-right: 4px;
+  color: #f2f6f9;
+}
+
+#project .features-item img {
+  border: 6px solid var(--background-color);
+  box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+}
+
+#project .features-item .features-img-bg {
+  position: relative;
+  min-height: 500px;
+}
+
+@media (max-width: 640px) {
+  #project .features-item .features-img-bg {
+    min-height: 300px;
+  }
+}
+
+#project .features-item .features-img-bg img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+#project .features-item .image-stack {
+  display: grid;
+  position: relative;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+#project .features-item .image-stack .stack-back {
+  grid-column: 4/-1;
+  grid-row: 1;
+  width: 100%;
+  z-index: 1;
+}
+
+#project .features-item .image-stack .stack-front {
+  grid-row: 1;
+  grid-column: 1/span 8;
+  margin-top: 20%;
+  width: 100%;
+  z-index: 2;
+}
+
 /*--------------------------------------------------------------
 # Testimonials
 --------------------------------------------------------------*/
