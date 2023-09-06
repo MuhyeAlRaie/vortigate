@@ -942,6 +942,12 @@ section {
   z-index: 1;
 }
 
+#project .features-item h1 {
+color: #999;
+  font-weight: 200;
+  font-size: 14px;
+}
+
 #project .features-item .image-stack .stack-front {
   grid-row: 1;
   grid-column: 1/span 8;
