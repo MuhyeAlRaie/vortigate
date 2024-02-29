@@ -208,13 +208,13 @@ h6 {
   width: 100%;
 }
 
-.navbar a:hover,
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover>a {
   color: #fff;
   background: linear-gradient(297deg, #AC7AF6 0%, #05FBAC  100%);
   border-radius: 4px;
+  padding: 7px 26px;
 }
 
 .navbar .getstarted,
@@ -911,6 +911,7 @@ section {
 #project .features-item .features-img-bg {
   position: relative;
   min-height: 500px;
+  margin: 0 !important;
 }
 
 @media (max-width: 640px) {
@@ -1841,4 +1842,50 @@ background: #010918;
   100% {
     transform: scale(1);
   }
+}
+
+.img-right .text-col  {
+  padding-left:4rem ;
+}
+
+.client-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.our-clients-title {
+  background-color: #010918;
+}
+
+.our-clients {
+  padding: 0;
+  background-color: #010918;
+}
+
+.our-clients img {
+
+  background: white;
+  border-radius: 8px;
+}
+
+
+.our-clients .levenbert-img {
+  margin: 0 140px;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .our-clients .levenbert-img {
+    margin:0;
+  }  
+
+  .client-list{
+    flex-flow: column;
+  }
+
+  .client-item {
+    margin-bottom: 3rem;
+  }
+  
 }
