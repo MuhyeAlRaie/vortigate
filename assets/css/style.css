@@ -1889,3 +1889,56 @@ background: #010918;
   }
   
 }
+
+body {
+  background-color: #010918;
+}
+
+
+/*--------------------------------------------------------------
+# Page Header
+--------------------------------------------------------------*/
+.page-header {
+  position: relative;
+  display: block;
+  padding: 260px 0 158px;
+  background-color: #000;
+  z-index: 1;
+}
+
+.page-header-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-color: #000;
+  background-blend-mode: luminosity;
+  opacity: .20;
+  z-index: -1;
+}
+
+.page-header__inner {
+  position: relative;
+  display: block;
+  text-align: center;
+  z-index: 2;
+}
+
+.page-header__inner h2 {
+  font-size: 50px;
+  color: var(--mibooz-base);
+  line-height: 60px;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+.content-wrapper {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
