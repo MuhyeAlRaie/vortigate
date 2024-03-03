@@ -1851,7 +1851,7 @@ background: #010918;
 .client-list {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .our-clients-title {
@@ -1870,9 +1870,6 @@ background: #010918;
 }
 
 
-.our-clients .levenbert-img {
-  margin: 0 140px;
-}
 
 
 @media only screen and (max-width: 768px) {
