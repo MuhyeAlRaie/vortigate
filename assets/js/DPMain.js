@@ -8,7 +8,7 @@ var apartmentData = {
         "availability": "Available",
         "bedroom": 2,
         "bathroom": 1,
-        "iframeSrc": "https://momento360.com/e/u/a9b53aa8f8b0403ba7a4e18243aabc66"
+        "iframeSrc": "https://momento360.com/e/u/e89f13d9187b4fb1a809c49d7344e60a?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true"
     },
     "apartment2": {
         "video": "assets/apartmentsVid.mp4",
@@ -18,7 +18,7 @@ var apartmentData = {
         "availability": "Reserved",
         "bedroom": 1,
         "bathroom": 1,
-        "iframeSrc": "https://momento360.com/e/u/a9b53aa8f8b0403ba7a4e18243aabc66"
+        "iframeSrc": "https://momento360.com/e/u/e89f13d9187b4fb1a809c49d7344e60a?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true"
     },
     "apartment3": {
         "video": "assets/apartmentsVid.mp4",
@@ -28,7 +28,7 @@ var apartmentData = {
         "availability": "Available",
         "bedroom": 1,
         "bathroom": 1,
-        "iframeSrc": "https://momento360.com/e/u/a9b53aa8f8b0403ba7a4e18243aabc66"
+        "iframeSrc": "https://momento360.com/e/u/e89f13d9187b4fb1a809c49d7344e60a?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true"
     },  
      "apartment4": {
         "video": "assets/apartmentsVid.mp4",
@@ -38,7 +38,7 @@ var apartmentData = {
         "availability": "Available",
         "bedroom": 1,
         "bathroom": 1,
-        "iframeSrc": "https://momento360.com/e/u/a9b53aa8f8b0403ba7a4e18243aabc66"
+        "iframeSrc": "https://momento360.com/e/u/e89f13d9187b4fb1a809c49d7344e60a?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true"
     },
     "apartment5": {
         "video": "assets/apartmentsVid.mp4",
@@ -48,7 +48,7 @@ var apartmentData = {
         "availability": "Reserved",
         "bedroom": 2,
         "bathroom": 1,
-        "iframeSrc": "https://momento360.com/e/u/a9b53aa8f8b0403ba7a4e18243aabc66"
+        "iframeSrc": "https://momento360.com/e/u/e89f13d9187b4fb1a809c49d7344e60a?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true"
     },
     // Add details for other apartments as needed
 };
@@ -344,7 +344,7 @@ function updateSidebar(apartments) {
 // function openIframe() {
 //     // Create an iframe element
 //     var iframe = document.createElement('iframe');
-//     iframe.src = 'https://momento360.com/e/u/a9b53aa8f8b0403ba7a4e18243aabc66'; // Set the URL for your iframe content
+//     iframe.src = 'https://momento360.com/e/u/e89f13d9187b4fb1a809c49d7344e60a?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true'; // Set the URL for your iframe content
 //     iframe.width = '800'; // Set the width of the iframe
 //     iframe.height = '600'; // Set the height of the iframe
 
