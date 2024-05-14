@@ -431,10 +431,6 @@ input[type = "text"]{
         width: 66%;
     }
 
-    #apartment-image {
-        display: none;
-    }
-    
     .contact-wrapper .styled-input label {
         padding: 0 10px;    }
 
