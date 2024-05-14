@@ -14,7 +14,6 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(209,0,0,0.936011904761
     height: 100%;
     object-fit: cover;
     z-index: -1;
-    filter: brightness(80%);
 }
 
 #navbar {
@@ -163,6 +162,14 @@ html {
     flex-flow: column;
     color: white;
 }
+
+
+@media (min-width:1025px) { 
+    .home-wrapper .statistics-wrapper .item {
+        padding: 0 8px;
+    }
+}
+
 .home-wrapper .statistics-wrapper .item .number {
     font-weight: bold;
     font-size: 34px;
