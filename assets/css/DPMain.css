@@ -2,6 +2,8 @@ body {
     margin: 0;
     overflow: hidden;
     font-size: 16px;
+    background: rgb(0,0,0);
+background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(209,0,0,0.9360119047619048) 100%);
 }
 
 #background-video {
@@ -120,6 +122,7 @@ html {
     align-items: center;
     justify-content: center;
     flex-flow: column;
+    width: 25%;
 }
 
 .Feature-wrapper button{
@@ -129,17 +132,22 @@ html {
 .home-wrapper {
   margin-top: 7rem;
   margin-left: 1rem;
+  width: 24%;
 }
 
 #sidebar .home-wrapper p {
-    font-size: 12px;
-    color: aliceblue;
+    color: white;
+}
+
+.main-desc {
+    border-bottom: 1px solid grey;
+    padding-bottom: 30px;
 }
 
 .home-wrapper h2{
     text-transform: uppercase;
     max-width: 80%;
-    color: aliceblue;
+    color: white;
 }
 
 .home-wrapper .statistics-wrapper {
@@ -153,7 +161,7 @@ html {
     align-items: start;
     justify-content: center;
     flex-flow: column;
-    color: aliceblue;
+    color: white;
 }
 .home-wrapper .statistics-wrapper .item .number {
     font-weight: bold;
@@ -212,7 +220,6 @@ input[type = "text"]{
 #second-sidebar {
     position: fixed;
     overflow-y: auto;
-    background: rgba(0, 0, 0, 0.129);
     color: white;
     padding: 2em;
     box-sizing: border-box;
@@ -222,15 +229,10 @@ input[type = "text"]{
 
 
 #sidebar {
-    width: 30%;
+    width: 100%;
     left: 0;
     height: 100%;
-}
-
-#sidebar {
-    width: 30%;
-    left: 0;
-    height: 100%;
+    background: linear-gradient(90deg, rgba(21,22,23,1) 0%, rgba(255,255,255,0) 100%);
 }
 
 #second-sidebar {
@@ -241,6 +243,14 @@ input[type = "text"]{
 #sidebar h2,
 #second-sidebar h2 {
     font-size: 32px;
+}
+
+@media (min-width:1025px) { 
+
+    #sidebar h2,
+    #second-sidebar h2 {
+        font-size: 42px;
+    }
 }
 
 #sidebar p,
@@ -292,7 +302,8 @@ input[type = "text"]{
     align-items: baseline;
     justify-content: center;
     height: 100%;
-    color: aliceblue;
+    color:white;
+    width: 25%;
 }
 
 .iframe-container {
@@ -370,7 +381,7 @@ input[type = "text"]{
 }
 
 .contact-wrapper .submit-btn {
-    padding: 7px 35px;
+    padding: 7px 17px;
     border-radius: 60px;
     display: inline-block;
     background-color: #2d2d2d;
@@ -490,7 +501,7 @@ font-size: 8px;
 
 
     #sidebar {
-        width: 30%;
+        width: 70%;
         left: 0;
         height: 100%;
     }
@@ -670,6 +681,6 @@ width: 8rem;
     /* big landscape tablets, laptops, and desktops */ 
     #second-sidebar {
 top: 13%;
-left: 30%;
+left: 17%;
     }
 }
