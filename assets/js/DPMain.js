@@ -2,7 +2,7 @@
 var apartmentData = {
     "apartment1": {
         "video": "assets/apartmentsVid.mp4",
-        "image": "assets/FloorPlane.jpg",
+        "image": "assets/FloorPlane.png",
         "price": 250000,
         "surface": 100,
         "availability": "Available",
@@ -12,7 +12,7 @@ var apartmentData = {
     },
     "apartment2": {
         "video": "assets/apartmentsVid.mp4",
-        "image": "assets/FloorPlane.jpg",
+        "image": "assets/FloorPlane.png",
         "price": 200000,
         "surface": 60,
         "availability": "Reserved",
@@ -22,7 +22,7 @@ var apartmentData = {
     },
     "apartment3": {
         "video": "assets/apartmentsVid.mp4",
-        "image": "assets/FloorPlane.jpg",
+        "image": "assets/FloorPlane.png",
         "price": 150000,
         "surface": 60,
         "availability": "Available",
@@ -32,7 +32,7 @@ var apartmentData = {
     },  
      "apartment4": {
         "video": "assets/apartmentsVid.mp4",
-        "image": "assets/FloorPlane.jpg",
+        "image": "assets/FloorPlane.png",
         "price": 140000,
         "surface": 50,
         "availability": "Available",
@@ -42,7 +42,7 @@ var apartmentData = {
     },
     "apartment5": {
         "video": "assets/apartmentsVid.mp4",
-        "image": "assets/FloorPlane.jpg",
+        "image": "assets/FloorPlane.png",
         "price": 180000,
         "surface": 80,
         "availability": "Reserved",
