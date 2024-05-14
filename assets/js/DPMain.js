@@ -441,3 +441,5 @@ function openIframe(iframeSrc) {
     closeButton.style.color = '#000'; // Set the color of the "X"
     closeButton.style.cursor = 'pointer';
 }
+
+document.getElementById('home-btn').click();
