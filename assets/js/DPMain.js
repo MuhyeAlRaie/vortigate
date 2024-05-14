@@ -113,7 +113,6 @@ function openSidebar(type, button) {
                     };
                 })(apartmentKey);
                 
-                // Append each button to the wrapper div
                 apartmentWrapperDiv.appendChild(apartmentButton);
             }
         }
