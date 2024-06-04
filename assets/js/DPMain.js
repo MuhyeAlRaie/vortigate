@@ -56,6 +56,10 @@ var apartmentData = {
 
 function changeVideo(videoSource, button) {
     document.getElementById('background-video').src = videoSource;
+    
+    // Ensure inline playback on iOS
+    var video = document.getElementById('background-video');
+    video.setAttribute('playsinline', true);
 
     // Remove 'active' class from all buttons
     document.querySelectorAll('.navbar-button').forEach(function (btn) {
@@ -152,20 +156,12 @@ sidebar.appendChild(wrapperDiv);
             var featureButton = document.createElement('button');
             featureButton.textContent = features[j];
             featureButton.onclick = function () {
-                (function changeVideo(videoSrc, button) {
-                  const videoElement = document.createElement('video');
-                  videoElement.src = videoSrc;
-                  videoElement.muted = true; // Mute the video (optional, for better user experience)
-              
-                  button.addEventListener('click', () => {
-                    videoElement.play()
-                      .then(() => videoElement.requestPictureInPicture())
-                      .catch(error => console.error('Error requesting PiP:', error));
-                  });
-              
-                  // Optionally, append the video element to your website's DOM (if needed)
-                })('assets/Bgvid.mp4', this); // Call the function immediately with video source and button
-              };
+                changeVideo('assets/Bgvid.mp4', button);
+                // Handle feature click
+                // You can customize this function to display more information about the feature
+                console.log('Feature Clicked: ' + features[j]);
+            };
+
             // Append each button to the wrapper div
             wrapperDiv.appendChild(featureButton);
         }
@@ -449,5 +445,7 @@ function openIframe(iframeSrc) {
     closeButton.style.color = '#000'; // Set the color of the "X"
     closeButton.style.cursor = 'pointer';
 }
+
+
 
 document.getElementById('home-btn').click();
