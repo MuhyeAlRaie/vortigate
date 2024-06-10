@@ -294,11 +294,11 @@ function applyFilters() {
     }
 
     // Update the sidebar with filtered apartments
-    updateSidebar(filteredApartments);
+    updateSidebar(filteredApartments, filterPrice, filterSurface, filterAvailability);
 }
 
 // Function to update the sidebar with the filtered apartments
-function updateSidebar(apartments) {
+function updateSidebar(apartments, lastPrice, lastSurface, lastAvailability) {
     var sidebar = document.getElementById('sidebar');
     
     // Create a wrapper div for apartments
@@ -315,15 +315,15 @@ function updateSidebar(apartments) {
 
     filterSection.innerHTML = 
         '<label for="filter-price">السعر:</label>' +
-        '<input type="text" id="filter-price" placeholder="ادخل السعر">' +
+        `<input type="text" id="filter-price" placeholder="ادخل السعر" value="${lastPrice || ''}">` +
         '<label for="filter-surface">المساحة:</label>' +
-        '<input type="text" id="filter-surface" placeholder="ادخل المساحة">' +
+        `<input type="text" id="filter-surface" placeholder="ادخل المساحة" value="${lastSurface || ''}">` +
         '<label for="filter-availability">حالة الشقة:</label>' +
-        '<select id="filter-availability">' +
-        ' <option value="">الجميع</option>'+
-        '<option value="متاحة">متاحة</option>'+
-        '<option value="محجوزة">محجوزة</option>'+
-    '</select>' +
+        `<select id="filter-availability">
+            <option value="" ${lastAvailability === '' ? 'selected' : ''}>الجميع</option>
+            <option value="متاحة" ${lastAvailability === 'متاحة' ? 'selected' : ''}>متاحة</option>
+            <option value="محجوزة" ${lastAvailability === 'محجوزة' ? 'selected' : ''}>محجوزة</option>
+        </select>` +
         '<button onclick="applyFilters()">البحث</button>';
 
     sidebar.appendChild(filterSection);

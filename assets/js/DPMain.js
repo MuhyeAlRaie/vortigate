@@ -294,17 +294,17 @@ function applyFilters() {
     }
 
     // Update the sidebar with filtered apartments
-    updateSidebar(filteredApartments);
+    updateSidebar(filteredApartments, filterPrice, filterSurface, filterAvailability);
 }
 
 // Function to update the sidebar with the filtered apartments
-function updateSidebar(apartments) {
+function updateSidebar(apartments, lastPrice, lastSurface, lastAvailability) {
     var sidebar = document.getElementById('sidebar');
-    
+
     // Create a wrapper div for apartments
     var apartmentWrapper = document.createElement('div');
     apartmentWrapper.classList = 'apartment-wrapper';
-    
+
     // Clear previous content
     sidebar.innerHTML = '';
 
@@ -315,15 +315,15 @@ function updateSidebar(apartments) {
 
     filterSection.innerHTML = 
         '<label for="filter-price">Price:</label>' +
-        '<input type="text" id="filter-price" placeholder="Enter price">' +
+        `<input type="text" id="filter-price" placeholder="Enter price" value="${lastPrice || ''}">` +
         '<label for="filter-surface">Surface:</label>' +
-        '<input type="text" id="filter-surface" placeholder="Enter surface">' +
+        `<input type="text" id="filter-surface" placeholder="Enter surface" value="${lastSurface || ''}">` +
         '<label for="filter-availability">Availability:</label>' +
-        '<select id="filter-availability">' +
-            '<option value="">All</option>' +
-            '<option value="Available">Available</option>' +
-            '<option value="Reserved">Reserved</option>' +
-        '</select>' +
+        `<select id="filter-availability">
+            <option value="" ${lastAvailability === '' ? 'selected' : ''}>All</option>
+            <option value="Available" ${lastAvailability === 'Available' ? 'selected' : ''}>Available</option>
+            <option value="Reserved" ${lastAvailability === 'Reserved' ? 'selected' : ''}>Reserved</option>
+        </select>` +
         '<button onclick="applyFilters()">Apply Filters</button>';
 
     sidebar.appendChild(filterSection);
