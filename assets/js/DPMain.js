@@ -132,7 +132,7 @@ wrapperDiv.className = 'home-wrapper';
 
 // Set innerHTML for the wrapper div
 wrapperDiv.innerHTML = '<h2>Your Project on Earth</h2>' +
-    '<p class="main-desc">We are developing a sophisticated complex tailored for individuals who appreciate contemporary urban living. This innovative concept is designed to impeccably align with the distinctive standards of Dubai.</p>' +
+    '<p class="main-desc">We are developing a sophisticated complex tailored for individuals who appreciate contemporary urban living. This innovative concept is designed to impeccably align with the distinctive standards of KSA.</p>' +
     '<div class="statistics-wrapper">' +
     '<div class="item"><div class="number">4</div><div class="description">minutes to the bus station</div></div>' +
     '<div class="item"><div class="number">7</div><div class="description">minutes to the shopping center</div></div>' +
