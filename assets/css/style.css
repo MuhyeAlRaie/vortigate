@@ -1939,3 +1939,19 @@ body {
   align-items: center;
   justify-content: space-between;
 }
+
+.row-wrapper2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.row-wrapper1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge2 {
+  margin-right: 20px;
+}
