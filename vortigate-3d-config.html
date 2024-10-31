@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Showroom | Configurable 3D Tour</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-text-geometry-component/dist/aframe-text-geometry-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+
+
+    <script src="3DConfigVortigate/ui-animation.js"></script>
+    <script src="3DConfigVortigate/main.js"></script>
+    <style>
+        .links {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            height: auto;
+            filter: invert(1);
+            z-index: 1000;
+        }
+
+        .links a {
+            margin: 0 15px;
+            display: block;
+        }
+
+        .links img {
+            width: 60px;
+            height: 60px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .links img:hover {
+            transform: scale(1.1);
+        }
+    </style>
+
+
+
+
+    <script>
+    </script>
+</head>
+
+<body>
+    <a-scene id="scene1" vr-mode-ui="enabled: false" cursor="rayOrigin: mouse" raycaster="near: 0; far: 1500">
+        <a-sky id="Depthmap" src="https://du3zdyenrn790.cloudfront.net/ND_Livingroom_1_0000.jpg"></a-sky>
+        <a-entity id="CamRoot" rotation="0 0 0">
+            <a-camera id="camera" position="0 0 0"></a-camera>
+        </a-entity>
+
+    </a-scene>
+
+    <a-scene id="scene2" vr-mode-ui="enabled: false" cursor="rayOrigin: mouse" raycaster="near: 0; far: 1500">
+        <a-sky id="Mainmap" src="https://du3zdyenrn790.cloudfront.net/RGB_Livingroom_1_KitchenBrown_SofaBrown_WallGrey_0000.jpg"></a-sky>
+        <a-camera id="camera" position="0 0 0" look-controls="reverseMouseDrag: true"></a-camera>
+        <a-ring id="Navigator" position="0 0 -100" radius-inner="0.15" radius-outer="0.2" color="white" follow-mouse="target: #Navigator" material="side: double; shader: flat"></a-ring>
+        <a-light type="hemisphere" color="#bebebe" groundColor="#ffffff" intensity=".7" position="0 0 0"></a-light>
+        <a-light type="point" color="#ffffff" intensity="0.5" position="0 2 0"></a-light>
+
+        <a-entity id="root" position="0 0 0"></a-entity>
+    </a-scene>
+
+
+    <div class="links">
+        <a href="https://www.linkedin.com/company/vortigate/">
+          <img src="./3DConfigVortigate/UI/linkedin.png" >
+        </a>
+        <a href="https://www.youtube.com/@vortigateCo">
+          <img src="./3DConfigVortigate/UI/youtube.png" >
+        </a>
+
+    </div>
+
+</body>
+
+</html>
