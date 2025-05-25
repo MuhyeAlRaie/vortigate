@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MEU VR Tour</title>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-text-geometry-component/dist/aframe-text-geometry-component.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
 
@@ -40,6 +40,19 @@
         .links img:hover {
             transform: scale(1.1);
         }
+           #enterVRButton {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        padding: 12px 24px;
+        background-color: #007BFF;
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        z-index: 999;
+      }
     </style>
 </head>
 
@@ -61,6 +74,18 @@
         <a href="https://www.youtube.com/@vortigateCo">
             <img src="./3DTourMEU/UI/youtube.png">
         </a>
+        <button id="enterVRButton">Enter VR</button>
     </div>
+ 
 </body>
+  <script>
+      const button = document.getElementById("enterVRButton");
+      const scene = document.querySelector("a-scene");
+
+      button.addEventListener("click", () => {
+        if (scene && scene.enterVR) {
+          scene.enterVR();
+        }
+      });
+    </script>
 </html>
