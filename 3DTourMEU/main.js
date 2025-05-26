@@ -1,3 +1,5 @@
+let hotspotJson = {};
+let currentImageId = "01";
 
 AFRAME.registerComponent('cursor-listener', {
     init: function () {
@@ -16,24 +18,67 @@ AFRAME.registerComponent('cursor-listener', {
         el.addEventListener('mousedown', handleInteraction);
         el.addEventListener('touchstart', handleInteraction);
 
-        function handleInteraction(event) {
-            event.preventDefault();
-            const root = document.getElementById('root');
-            while (root.firstChild) root.removeChild(root.firstChild);
+       function handleInteraction(event) {
+    event.preventDefault();
+    const root = document.getElementById('root');
+    while (root.firstChild) root.removeChild(root.firstChild);
 
-            const imgId = el.getAttribute('id');
-            document.querySelector('#Mainmap').setAttribute("src", `assets/images/${imgId}.jpg`);
-            loadHotspotData(imgId);
-        }
+    const hotspotId = el.getAttribute('id');
+    const infoData = hotspotJson[currentImageId]?.[hotspotId]?.info;
+
+    if (infoData) {
+        const infoText = infoData.text || '';
+        const boardPosition = infoData.boardPosition || '0 1.5 -2';
+        const textPosition = infoData.textPosition || '0 0 0.01';
+        show3DInfoBoard(infoText, boardPosition, textPosition);
+    } else {
+        document.querySelector('#Mainmap').setAttribute("src", `assets/images/${hotspotId}.jpg`);
+        loadHotspotData(hotspotId);
+        currentImageId = hotspotId;
+    }
+}
     }
 });
+
+function show3DInfoBoard(content, boardPosition, textPosition) {
+    const root = document.getElementById('root');
+
+    const board = document.createElement('a-entity');
+    board.setAttribute('position', boardPosition);
+    board.setAttribute('rotation', '0 0 0');
+
+    const background = document.createElement('a-plane');
+    background.setAttribute('width', '1.6');
+    background.setAttribute('height', '0.8');
+    background.setAttribute('color', '#ffffff');
+    background.setAttribute('material', 'side: double; opacity: 0.85');
+    background.setAttribute('position', '0 0 0');
+
+    const text = document.createElement('a-text');
+    text.setAttribute('value', content);
+    text.setAttribute('align', 'center');
+    text.setAttribute('color', '#000000');
+    text.setAttribute('width', '1.5');
+    text.setAttribute('wrap-count', '40');
+    text.setAttribute('position', textPosition);
+
+    board.appendChild(background);
+    board.appendChild(text);
+    root.appendChild(board);
+
+    setTimeout(() => {
+        if (board.parentNode) {
+            board.parentNode.removeChild(board);
+        }
+    }, 20000);
+}
 
 let addedEntities = [];
 
 async function loadHotspotData(part) {
     const response = await fetch('HotspotDataMEU.json');
-    const data = await response.json();
-    const viewPoints = data[part];
+    hotspotJson = await response.json();
+    const viewPoints = hotspotJson[part];
     const scene2 = document.querySelector('#scene2');
 
     addedEntities.forEach(entity => scene2.removeChild(entity));
@@ -42,24 +87,40 @@ async function loadHotspotData(part) {
     for (const point in viewPoints) {
         const location = viewPoints[point].location;
         const rotation = viewPoints[point].rotation;
-        const entity = document.createElement('a-entity');
 
+        let positionStr;
+        if (typeof location === 'string') {
+            positionStr = location;
+        } else if (typeof location === 'object') {
+            positionStr = `${location.x} ${location.y} ${location.z}`;
+        }
+
+        const entity = document.createElement('a-entity');
         entity.setAttribute('id', point);
-        entity.setAttribute('position', location);
+        entity.setAttribute('position', positionStr);
         entity.setAttribute('cursor-listener', '');
         entity.setAttribute('rotation', rotation);
         entity.setAttribute('scale', '0.4 0.4 0.4');
 
-        const image = document.createElement('a-ring');
-        image.setAttribute('material', 'color: white; shader: flat; side: double; transparent: true; opacity: 0.3;');
-        image.setAttribute('geometry', { radiusInner: 0.3, radiusOuter: 0.5 });
+        const isInfoPoint = !!viewPoints[point].info;
+
+        let visual;
+        if (isInfoPoint) {
+            visual = document.createElement('a-plane');
+            visual.setAttribute('material', 'color:#8e101b; shader: flat; side: double; opacity: 0.95');
+            visual.setAttribute('geometry', 'primitive: circle; radius: 0.2; segments: 38;');
+        } else {
+            visual = document.createElement('a-ring');
+            visual.setAttribute('material', 'color: white; shader: flat; side: double; transparent: true; opacity: 0.3;');
+            visual.setAttribute('geometry', { radiusInner: 0.3, radiusOuter: 0.5 });
+        }
 
         const innerPlane = document.createElement('a-plane');
         innerPlane.setAttribute('material', 'transparent: true; opacity: 0;');
         innerPlane.setAttribute('geometry', 'primitive: circle; radius: 0.3; segments: 38;');
 
         entity.appendChild(innerPlane);
-        entity.appendChild(image);
+        entity.appendChild(visual);
         scene2.appendChild(entity);
         addedEntities.push(entity);
     }

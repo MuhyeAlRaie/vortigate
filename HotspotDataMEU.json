@@ -1,6 +1,6 @@
 {
-  "01": { "02": { "location": "-3 -1 0", "rotation": "90 90 0" } },
-  "02": { "03": { "location": "-3 -1 0", "rotation": "90 90 0" }, "01": { "location": "2.5 -1 0", "rotation": "90 90 0" } },
+  "01": { "02": { "location": "-3 -1 0", "rotation": "90 90 0" }},
+  "02": { "03": { "location": "-3 -1 0", "rotation": "90 90 0" }, "01": { "location": "2.5 -1 0", "rotation": "90 90 0" },   "info1": { "location": "0 0 -2.9", "rotation": "0 180 0","info": {  "text": "Welcome to the lobby!", "boardPosition": "0 1 -2.9", "textPosition": "0 0 0.01"}  }},
   "03": { "04": { "location": "-3 -1 0", "rotation": "90 90 0" }, "02": { "location": "2.5 -1 0", "rotation": "90 90 0" }  },
   "04": { "05": { "location": "-3 -1 0", "rotation": "90 90 0" }, "03": { "location": "2.5 -1 0", "rotation": "90 90 0" }  },
   "05": { "06": { "location": "-3 -1 0", "rotation": "90 90 0" }, "04": { "location": "2.5 -1 0", "rotation": "90 90 0" }  },
