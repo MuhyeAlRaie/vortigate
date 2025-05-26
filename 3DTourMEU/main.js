@@ -46,13 +46,29 @@ function show3DInfoBoard(content, boardPosition, textPosition) {
     const board = document.createElement('a-entity');
     board.setAttribute('position', boardPosition);
     board.setAttribute('rotation', '0 0 0');
+    board.setAttribute('scale', '0 0 0'); // Start hidden (scaled down)
 
+    // Scale animation
+    board.setAttribute('animation__scale', {
+        property: 'scale',
+        to: '1 1 1',
+        dur: 500,
+        easing: 'easeOutElastic'
+    });
+
+    // Opacity animation (we’ll animate the background plane’s material)
     const background = document.createElement('a-plane');
     background.setAttribute('width', '1.6');
     background.setAttribute('height', '0.8');
     background.setAttribute('color', '#ffffff');
-    background.setAttribute('material', 'side: double; opacity: 0.85');
+    background.setAttribute('material', 'side: double; opacity: 0');
     background.setAttribute('position', '0 0 0');
+    background.setAttribute('animation__fadein', {
+        property: 'material.opacity',
+        to: 0.85,
+        dur: 500,
+        easing: 'easeInOutQuad'
+    });
 
     const text = document.createElement('a-text');
     text.setAttribute('value', content);
@@ -66,12 +82,22 @@ function show3DInfoBoard(content, boardPosition, textPosition) {
     board.appendChild(text);
     root.appendChild(board);
 
+    // Remove after 20 seconds with fade-out (optional)
     setTimeout(() => {
         if (board.parentNode) {
-            board.parentNode.removeChild(board);
+            board.setAttribute('animation__scale_out', {
+                property: 'scale',
+                to: '0 0 0',
+                dur: 500,
+                easing: 'easeInOutCubic'
+            });
+            setTimeout(() => {
+                if (board.parentNode) board.parentNode.removeChild(board);
+            }, 500);
         }
-    }, 20000);
+    }, 10000);
 }
+
 
 let addedEntities = [];
 
