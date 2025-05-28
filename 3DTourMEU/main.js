@@ -30,7 +30,8 @@ AFRAME.registerComponent('cursor-listener', {
         const infoText = infoData.text || '';
         const boardPosition = infoData.boardPosition || '0 1.5 -2';
         const textPosition = infoData.textPosition || '0 0 0.01';
-        show3DInfoBoard(infoText, boardPosition, textPosition);
+        const boardRotation = infoData.boardRotation || '0 0 0';
+        show3DInfoBoard(infoText, boardPosition, textPosition, boardRotation);
     } else {
         document.querySelector('#Mainmap').setAttribute("src", `assets/images/${hotspotId}.jpg`);
         loadHotspotData(hotspotId);
@@ -40,13 +41,13 @@ AFRAME.registerComponent('cursor-listener', {
     }
 });
 
-function show3DInfoBoard(content, boardPosition, textPosition) {
+function show3DInfoBoard(content, boardPosition, textPosition, boardRotation) {
     const root = document.getElementById('root');
 
     const board = document.createElement('a-entity');
     board.setAttribute('position', boardPosition);
-    board.setAttribute('rotation', '0 0 0');
-    board.setAttribute('scale', '0 0 0'); // Start hidden (scaled down)
+    board.setAttribute('rotation', boardRotation);
+    board.setAttribute('scale', '0 0 0');
 
     // Scale animation
     board.setAttribute('animation__scale', {
@@ -56,7 +57,7 @@ function show3DInfoBoard(content, boardPosition, textPosition) {
         easing: 'easeOutElastic'
     });
 
-    // Opacity animation (we’ll animate the background plane’s material)
+    // Background plane
     const background = document.createElement('a-plane');
     background.setAttribute('width', '1.6');
     background.setAttribute('height', '0.8');
@@ -70,6 +71,7 @@ function show3DInfoBoard(content, boardPosition, textPosition) {
         easing: 'easeInOutQuad'
     });
 
+    // Text
     const text = document.createElement('a-text');
     text.setAttribute('value', content);
     text.setAttribute('align', 'center');
@@ -82,7 +84,6 @@ function show3DInfoBoard(content, boardPosition, textPosition) {
     board.appendChild(text);
     root.appendChild(board);
 
-    // Remove after 20 seconds with fade-out (optional)
     setTimeout(() => {
         if (board.parentNode) {
             board.setAttribute('animation__scale_out', {
@@ -95,7 +96,7 @@ function show3DInfoBoard(content, boardPosition, textPosition) {
                 if (board.parentNode) board.parentNode.removeChild(board);
             }, 500);
         }
-    }, 10000);
+    }, 20000);
 }
 
 
