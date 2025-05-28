@@ -1,5 +1,6 @@
 let hotspotJson = {};
 let currentImageId = "01";
+let addedEntities = [];
 
 AFRAME.registerComponent('cursor-listener', {
     init: function () {
@@ -18,26 +19,26 @@ AFRAME.registerComponent('cursor-listener', {
         el.addEventListener('mousedown', handleInteraction);
         el.addEventListener('touchstart', handleInteraction);
 
-       function handleInteraction(event) {
-    event.preventDefault();
-    const root = document.getElementById('root');
-    while (root.firstChild) root.removeChild(root.firstChild);
+        function handleInteraction(event) {
+            event.preventDefault();
+            const root = document.getElementById('root');
+            while (root.firstChild) root.removeChild(root.firstChild);
 
-    const hotspotId = el.getAttribute('id');
-    const infoData = hotspotJson[currentImageId]?.[hotspotId]?.info;
+            const hotspotId = el.getAttribute('id');
+            const infoData = hotspotJson[currentImageId]?.[hotspotId]?.info;
 
-    if (infoData) {
-        const infoText = infoData.text || '';
-        const boardPosition = infoData.boardPosition || '0 1.5 -2';
-        const textPosition = infoData.textPosition || '0 0 0.01';
-        const boardRotation = infoData.boardRotation || '0 0 0';
-        show3DInfoBoard(infoText, boardPosition, textPosition, boardRotation);
-    } else {
-        document.querySelector('#Mainmap').setAttribute("src", `assets/images/${hotspotId}.jpg`);
-        loadHotspotData(hotspotId);
-        currentImageId = hotspotId;
-    }
-}
+            if (infoData) {
+                const infoText = infoData.text || '';
+                const boardPosition = infoData.boardPosition || '0 1.5 -2';
+                const textPosition = infoData.textPosition || '0 0 0.01';
+                const boardRotation = infoData.boardRotation || '0 0 0';
+                show3DInfoBoard(infoText, boardPosition, textPosition, boardRotation);
+            } else {
+                morphToImage(hotspotId);
+                loadHotspotData(hotspotId);
+                currentImageId = hotspotId;
+            }
+        }
     }
 });
 
@@ -99,8 +100,49 @@ function show3DInfoBoard(content, boardPosition, textPosition, boardRotation) {
     }, 20000);
 }
 
+function morphToImage(newId) {
+    const mainSky = document.querySelector('#Mainmap');
+    const transitionSky = document.querySelector('#MainmapTransition');
 
-let addedEntities = [];
+    transitionSky.setAttribute('src', `assets/images/${newId}.jpg`);
+    transitionSky.setAttribute('visible', 'true');
+    transitionSky.setAttribute('material', 'opacity: 0.001');
+
+    // إزالة أي أنيميشن قديم
+    transitionSky.removeAttribute('animation__fadein');
+    mainSky.removeAttribute('animation__fadeout');
+
+    // اسم عشوائي لتجنب تكرار الاسم
+    const fadeInName = `fadein_${Date.now()}`;
+    const fadeOutName = `fadeout_${Date.now()}`;
+
+    // Fade in new image
+    transitionSky.setAttribute(`animation__${fadeInName}`, {
+        property: 'material.opacity',
+        to: 1,
+        dur: 1000,
+        easing: 'easeInOutQuad'
+    });
+
+    // Fade out old image
+    mainSky.setAttribute(`animation__${fadeOutName}`, {
+        property: 'material.opacity',
+        to: 0,
+        dur: 1000,
+        easing: 'easeInOutQuad'
+    });
+
+    setTimeout(() => {
+        mainSky.setAttribute('src', `assets/images/${newId}.jpg`);
+        mainSky.setAttribute('material', 'opacity: 1');
+        transitionSky.setAttribute('visible', 'false');
+        transitionSky.setAttribute('material', 'opacity: 0');
+
+        // تنظيف الأنيميشنات لتجنب تراكمها
+        transitionSky.removeAttribute(`animation__${fadeInName}`);
+        mainSky.removeAttribute(`animation__${fadeOutName}`);
+    }, 1100);
+}
 
 async function loadHotspotData(part) {
     const response = await fetch('HotspotDataMEU.json');

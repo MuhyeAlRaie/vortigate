@@ -58,8 +58,8 @@
 
 <body>
     <a-scene id="scene2" vr-mode-ui="enabled: false" cursor="rayOrigin: mouse" raycaster="near: 0; far: 1500">
-        <a-sky id="Mainmap" src="assets/images/01.jpg"></a-sky>
-        <a-camera id="camera" position="0 0 0" look-controls="reverseMouseDrag: true"></a-camera>
+<a-sky id="Mainmap" src="assets/images/01.jpg" material="opacity: 1; transparent: true;"></a-sky>
+<a-sky id="MainmapTransition" src="" visible="false" material="opacity: 0; transparent: true;"></a-sky>        <a-camera id="camera" position="0 0 0" look-controls="reverseMouseDrag: true"></a-camera>
         <a-ring id="Navigator" position="0 0 -100" radius-inner="0.15" radius-outer="0.2" color="white" follow-mouse="target: #Navigator" material="side: double; shader: flat"></a-ring>
         <a-light type="hemisphere" color="#bebebe" groundColor="#ffffff" intensity=".7" position="0 0 0"></a-light>
         <a-light type="point" color="#ffffff" intensity="0.5" position="0 2 0"></a-light>
