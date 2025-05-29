@@ -1,3 +1,33 @@
+const imageCount = 56; // عدل العدد حسب عدد الصور الموجودة لديك
+const preloadImages = ['01', '02', '03']; // الصور الثلاثة الأولى
+const preloadedImages = new Set();
+
+function preloadInitialImages() {
+    let loadedCount = 0;
+    preloadImages.forEach(id => {
+        const img = new Image();
+        img.src = `assets/images/${id}.jpg`;
+        img.onload = () => {
+            preloadedImages.add(id);
+            loadedCount++;
+            if (loadedCount === preloadImages.length) {
+                hideLoadingScreen();
+            }
+        };
+    });
+}
+
+function hideLoadingScreen() {
+    const loadingScreen = document.getElementById('loading-screen');
+    if (loadingScreen) {
+        loadingScreen.style.transition = 'opacity 0.5s';
+        loadingScreen.style.opacity = '0';
+        setTimeout(() => {
+            loadingScreen.remove();
+        }, 500);
+    }
+}
+
 let hotspotJson = {};
 let currentImageId = "01";
 let addedEntities = [];
@@ -195,6 +225,13 @@ async function loadHotspotData(part) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+
+    document.addEventListener('DOMContentLoaded', function () {
+    preloadInitialImages();
     loadHotspotData('01');
+
+    // بعد ثانيتين يبدأ تحميل باقي الصور بهدوء
+    setTimeout(() => {
+        lazyLoadRemainingImages();
+    }, 2000);
 });
