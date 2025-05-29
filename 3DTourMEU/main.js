@@ -1,5 +1,5 @@
 const imageCount = 56; // عدل العدد حسب عدد الصور الموجودة لديك
-const preloadImages = ['01', '02', '03']; // الصور الثلاثة الأولى
+const preloadImages = ['01', '02', '03', '04', '05', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']; // الصور الثلاثة الأولى
 const preloadedImages = new Set();
 
 function preloadInitialImages() {
