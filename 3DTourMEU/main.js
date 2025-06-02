@@ -207,18 +207,22 @@ function show3DWebBoard(url, boardPosition, boardRotation) {
     root.appendChild(board);
 
     const iframeContainer = document.createElement('div');
-    iframeContainer.style.position = 'fixed';
-    iframeContainer.style.top = '50%';
-    iframeContainer.style.left = '50%';
-    iframeContainer.style.transform = 'translate(-50%, -50%)';
-    iframeContainer.style.width = '800px';
-    iframeContainer.style.height = '500px';
-    iframeContainer.style.background = '#fff';
-    iframeContainer.style.border = '2px solid #000';
-    iframeContainer.style.borderRadius = '8px';
-    iframeContainer.style.boxShadow = '0 0 20px rgba(0,0,0,0.5)';
-    iframeContainer.style.zIndex = '9999';
-    iframeContainer.style.overflow = 'hidden';
+iframeContainer.style.position = 'fixed';
+iframeContainer.style.top = '50%';
+iframeContainer.style.left = '50%';
+iframeContainer.style.transform = 'translate(-50%, -50%)';
+iframeContainer.style.width = '90vw';
+iframeContainer.style.maxWidth = '800px';
+iframeContainer.style.height = '70vh';
+iframeContainer.style.maxHeight = '500px';
+iframeContainer.style.background = '#fff';
+iframeContainer.style.border = '2px solid #000';
+iframeContainer.style.borderRadius = '8px';
+iframeContainer.style.boxShadow = '0 0 20px rgba(0,0,0,0.5)';
+iframeContainer.style.zIndex = '9999';
+iframeContainer.style.overflow = 'hidden';
+iframeContainer.style.display = 'flex';
+iframeContainer.style.flexDirection = 'column';
 
     const closeButton = document.createElement('button');
     closeButton.innerText = '×';
@@ -241,10 +245,11 @@ function show3DWebBoard(url, boardPosition, boardRotation) {
     };
 
     const iframe = document.createElement('iframe');
-    iframe.src = url;
-    iframe.width = '100%';
-    iframe.height = '100%';
-    iframe.style.border = 'none';
+iframe.src = url;
+iframe.style.flex = '1';
+iframe.style.border = 'none';
+iframe.style.width = '100%';
+iframe.style.height = '100%';
 
     iframeContainer.appendChild(closeButton);
     iframeContainer.appendChild(iframe);
