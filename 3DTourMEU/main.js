@@ -50,28 +50,83 @@ AFRAME.registerComponent('cursor-listener', {
         el.addEventListener('touchstart', handleInteraction);
 
         function handleInteraction(event) {
-            event.preventDefault();
-            const root = document.getElementById('root');
-            while (root.firstChild) root.removeChild(root.firstChild);
+    event.preventDefault();
+    const root = document.getElementById('root');
+    while (root.firstChild) root.removeChild(root.firstChild);
 
-            const hotspotId = el.getAttribute('id');
-            const infoData = hotspotJson[currentImageId]?.[hotspotId]?.info;
+    const hotspotId = el.getAttribute('id');
+    const infoData = hotspotJson[currentImageId]?.[hotspotId]?.info;
 
-            if (infoData) {
-                const infoText = infoData.text || '';
-                const boardPosition = infoData.boardPosition || '0 1.5 -2';
-                const textPosition = infoData.textPosition || '0 0 0.01';
-                const boardRotation = infoData.boardRotation || '0 0 0';
-                show3DInfoBoard(infoText, boardPosition, textPosition, boardRotation);
-            } else {
-                morphToImage(hotspotId);
-                loadHotspotData(hotspotId);
-                currentImageId = hotspotId;
-            }
+    if (infoData) {
+        const type = infoData.type || 'text';
+        if (type === 'web') {
+            const url = infoData.url;
+            const boardPosition = infoData.boardPosition || '0 1.5 -2';
+            const boardRotation = infoData.boardRotation || '0 0 0';
+            show3DWebBoard(url, boardPosition, boardRotation);
+        }else if (type === 'image') {
+        show3DTextInfoBoard(
+            infoData.image,
+            infoData.boardPosition || '0 1.5 -2',
+            infoData.boardRotation || '0 0 0',
+            infoData.imageSize || '1.5 0.5'
+        );
+    }
+        else {
+            const infoText = infoData.text || '';
+            const boardPosition = infoData.boardPosition || '0 1.5 -2';
+            const textPosition = infoData.textPosition || '0 0 0.01';
+            const boardRotation = infoData.boardRotation || '0 0 0';
+            show3DInfoBoard(infoText, boardPosition, textPosition, boardRotation);
         }
+    } else {
+        morphToImage(hotspotId);
+        loadHotspotData(hotspotId);
+        currentImageId = hotspotId;
+    }
+}
     }
 });
 
+function show3DTextInfoBoard(imageSrc, boardPosition, boardRotation, imageSize = "1.5 0.5") {
+    const root = document.getElementById('root');
+
+    const board = document.createElement('a-entity');
+    board.setAttribute('position', boardPosition);
+    board.setAttribute('rotation', boardRotation);
+    board.setAttribute('scale', '0 0 0');
+
+    board.setAttribute('animation__scale', {
+        property: 'scale',
+        to: '1 1 1',
+        dur: 500,
+        easing: 'easeOutElastic'
+    });
+
+    const [width, height] = imageSize.split(" ");
+    const image = document.createElement('a-image');
+    image.setAttribute('src', imageSrc);
+    image.setAttribute('width', width);
+    image.setAttribute('height', height);
+    image.setAttribute('position', '0 0 0');
+
+    board.appendChild(image);
+    root.appendChild(board);
+
+    setTimeout(() => {
+        if (board.parentNode) {
+            board.setAttribute('animation__scale_out', {
+                property: 'scale',
+                to: '0 0 0',
+                dur: 500,
+                easing: 'easeInOutCubic'
+            });
+            setTimeout(() => {
+                if (board.parentNode) board.parentNode.removeChild(board);
+            }, 500);
+        }
+    }, 20000);
+}
 function show3DInfoBoard(content, boardPosition, textPosition, boardRotation) {
     const root = document.getElementById('root');
 
@@ -93,16 +148,10 @@ function show3DInfoBoard(content, boardPosition, textPosition, boardRotation) {
     background.setAttribute('width', '1.6');
     background.setAttribute('height', '0.8');
     background.setAttribute('color', '#ffffff');
-    background.setAttribute('material', 'side: double; opacity: 0');
+    background.setAttribute('material', 'side: double; opacity: 0.9');
     background.setAttribute('position', '0 0 0');
-    background.setAttribute('animation__fadein', {
-        property: 'material.opacity',
-        to: 0.85,
-        dur: 500,
-        easing: 'easeInOutQuad'
-    });
 
-    // Text
+    // Text (Arabic support if needed)
     const text = document.createElement('a-text');
     text.setAttribute('value', content);
     text.setAttribute('align', 'center');
@@ -110,6 +159,8 @@ function show3DInfoBoard(content, boardPosition, textPosition, boardRotation) {
     text.setAttribute('width', '1.5');
     text.setAttribute('wrap-count', '40');
     text.setAttribute('position', textPosition);
+    text.setAttribute('direction', 'rtl'); // Optional for Arabic
+    text.setAttribute('baseline', 'center');
 
     board.appendChild(background);
     board.appendChild(text);
@@ -128,6 +179,76 @@ function show3DInfoBoard(content, boardPosition, textPosition, boardRotation) {
             }, 500);
         }
     }, 20000);
+}
+
+function show3DWebBoard(url, boardPosition, boardRotation) {
+    const root = document.getElementById('root');
+
+    const board = document.createElement('a-entity');
+    board.setAttribute('position', boardPosition);
+    board.setAttribute('rotation', boardRotation);
+    board.setAttribute('scale', '0 0 0');
+
+    board.setAttribute('animation__scale', {
+        property: 'scale',
+        to: '1 1 1',
+        dur: 500,
+        easing: 'easeOutElastic'
+    });
+
+    const background = document.createElement('a-plane');
+    background.setAttribute('width', '1.6');
+    background.setAttribute('height', '1');
+    background.setAttribute('color', '#ffffff');
+    background.setAttribute('material', 'side: double; opacity: 0.9');
+    background.setAttribute('position', '0 0 0');
+
+    board.appendChild(background);
+    root.appendChild(board);
+
+    const iframeContainer = document.createElement('div');
+    iframeContainer.style.position = 'fixed';
+    iframeContainer.style.top = '50%';
+    iframeContainer.style.left = '50%';
+    iframeContainer.style.transform = 'translate(-50%, -50%)';
+    iframeContainer.style.width = '800px';
+    iframeContainer.style.height = '500px';
+    iframeContainer.style.background = '#fff';
+    iframeContainer.style.border = '2px solid #000';
+    iframeContainer.style.borderRadius = '8px';
+    iframeContainer.style.boxShadow = '0 0 20px rgba(0,0,0,0.5)';
+    iframeContainer.style.zIndex = '9999';
+    iframeContainer.style.overflow = 'hidden';
+
+    const closeButton = document.createElement('button');
+    closeButton.innerText = '×';
+    closeButton.style.position = 'absolute';
+    closeButton.style.top = '5px';
+    closeButton.style.right = '10px';
+    closeButton.style.background = 'red';
+    closeButton.style.color = 'white';
+    closeButton.style.border = 'none';
+    closeButton.style.borderRadius = '50%';
+    closeButton.style.width = '30px';
+    closeButton.style.height = '30px';
+    closeButton.style.cursor = 'pointer';
+    closeButton.style.fontSize = '18px';
+    closeButton.title = 'Close';
+
+    closeButton.onclick = () => {
+        if (iframeContainer.parentNode) iframeContainer.parentNode.removeChild(iframeContainer);
+        if (board.parentNode) board.parentNode.removeChild(board);
+    };
+
+    const iframe = document.createElement('iframe');
+    iframe.src = url;
+    iframe.width = '100%';
+    iframe.height = '100%';
+    iframe.style.border = 'none';
+
+    iframeContainer.appendChild(closeButton);
+    iframeContainer.appendChild(iframe);
+    document.body.appendChild(iframeContainer);
 }
 
 function morphToImage(newId) {
