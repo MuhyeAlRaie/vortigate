@@ -37,12 +37,12 @@ AFRAME.registerComponent('cursor-listener', {
         var el = this.el;
 
         el.addEventListener('mouseenter', () => {
-            el.setAttribute('scale', '0.5 0.5 0.5');
+            el.setAttribute('scale', '0.7 0.7 0.7');
             document.querySelector('#Navigator').setAttribute('visible', 'false');
         });
 
         el.addEventListener('mouseleave', () => {
-            el.setAttribute('scale', '0.4 0.4 0.4');
+            el.setAttribute('scale', '0.6 0.6 0.6');
             document.querySelector('#Navigator').setAttribute('visible', 'true');
         });
 
@@ -325,7 +325,7 @@ async function loadHotspotData(part) {
         entity.setAttribute('position', positionStr);
         entity.setAttribute('cursor-listener', '');
         entity.setAttribute('rotation', rotation);
-        entity.setAttribute('scale', '0.4 0.4 0.4');
+        entity.setAttribute('scale', '0.6 0.6 0.6');
 
         const isInfoPoint = !!viewPoints[point].info;
 

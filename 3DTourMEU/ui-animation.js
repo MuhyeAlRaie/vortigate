@@ -36,9 +36,9 @@ function ringAnimation(el, color, offset, camera) {
     ring.setAttribute('rotation', `${initialRotation.x} ${initialRotation.y} ${initialRotation.z}`);
 
     ring.setAttribute('scale', {
-        x: 1,
-        y: 1,
-        z: 1
+        x: 1.2,
+        y: 1.2,
+        z: 1.2
     }); // Adjust the scale as needed
 
     // Add the half-ring to the scene
@@ -285,7 +285,7 @@ function create3DText(el, color, size) {
 function createHalfCircle(el, thetaStartValue) {
     // Create a half-circle ring
     const ring = document.createElement('a-ring');
-    ring.setAttribute('material', `color: #add0cb; shader: flat; side: double; transparent: true; opacity: 1;`);
+    ring.setAttribute('material', `color:rgb(255, 255, 255); shader: flat; side: double; transparent: true; opacity: 1;`);
     ring.setAttribute('geometry', {
         radiusInner: 0,
         radiusOuter: bgUIsize,
