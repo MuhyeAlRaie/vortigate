@@ -88,6 +88,30 @@ AFRAME.registerComponent('cursor-listener', {
     }
 });
 
+  AFRAME.registerComponent('controller-tracker', {
+    init: function () {
+      this.tracked = false;
+
+      this.el.addEventListener('controllerconnected', () => {
+        console.log('Controller connected:', this.el);
+        this.tracked = true;
+      });
+
+      this.el.addEventListener('controllerdisconnected', () => {
+        console.log('Controller disconnected:', this.el);
+        this.tracked = false;
+      });
+    },
+
+    tick: function () {
+      if (!this.tracked) return;
+
+      const pos = this.el.object3D.position;
+      const rot = this.el.object3D.rotation;
+      console.log(`Tracking: Pos (${pos.x.toFixed(2)}, ${pos.y.toFixed(2)}, ${pos.z.toFixed(2)})`);
+    }
+  });
+
 function show3DTextInfoBoard(imageSrc, boardPosition, boardRotation, imageSize = "1.5 0.5") {
     const root = document.getElementById('root');
 
@@ -334,8 +358,11 @@ async function loadHotspotData(part) {
             visual = document.createElement('a-plane');
             visual.setAttribute('material', 'color:#8e101b; shader: flat; side: double; opacity: 0.95');
             visual.setAttribute('geometry', 'primitive: circle; radius: 0.2; segments: 38;');
+            visual.setAttribute('class','interactable')
         } else {
             visual = document.createElement('a-ring');
+            visual.setAttribute('class','interactable')
+
             visual.setAttribute('material', 'color: white; shader: flat; side: double; transparent: true; opacity: 0.3;');
             visual.setAttribute('geometry', { radiusInner: 0.3, radiusOuter: 0.5 });
         }
