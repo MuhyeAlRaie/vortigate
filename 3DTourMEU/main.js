@@ -355,10 +355,13 @@ async function loadHotspotData(part) {
 
         let visual;
         if (isInfoPoint) {
-            visual = document.createElement('a-plane');
-            visual.setAttribute('material', 'color:#8e101b; shader: flat; side: double; opacity: 0.95');
-            visual.setAttribute('geometry', 'primitive: circle; radius: 0.2; segments: 38;');
-            visual.setAttribute('class','interactable')
+       visual = document.createElement('a-image');
+visual.setAttribute('class', 'interactable');
+visual.setAttribute('src', 'assets/images/info-icon.png'); // المسار إلى صورة الأيقونة
+visual.setAttribute('width', '0.7');
+visual.setAttribute('height', '0.7');
+visual.setAttribute('transparent', 'true');
+visual.setAttribute('alpha-test', '0.5');
         } else {
            visual = document.createElement('a-circle');
 visual.setAttribute('class','interactable');
