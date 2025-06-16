@@ -360,11 +360,10 @@ async function loadHotspotData(part) {
             visual.setAttribute('geometry', 'primitive: circle; radius: 0.2; segments: 38;');
             visual.setAttribute('class','interactable')
         } else {
-            visual = document.createElement('a-ring');
-            visual.setAttribute('class','interactable')
-
-            visual.setAttribute('material', 'color: white; shader: flat; side: double; transparent: true; opacity: 0.3;');
-            visual.setAttribute('geometry', { radiusInner: 0.3, radiusOuter: 0.5 });
+           visual = document.createElement('a-circle');
+visual.setAttribute('class','interactable');
+visual.setAttribute('material', 'color: white; shader: flat; side: double; transparent: true; opacity: 0.6;');
+visual.setAttribute('geometry', { radius: 0.7, segments: 38 });
         }
 
         const innerPlane = document.createElement('a-plane');
